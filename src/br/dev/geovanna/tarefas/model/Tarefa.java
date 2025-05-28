@@ -12,18 +12,17 @@ public class Tarefa {
 	private LocalDate dataEntrega;
 	private Status status;
 	private Funcionario responsavel;
-	
+
 	public Tarefa() {
 		System.out.println("Criando uma tarefa...");
-		
+
 	}
-	
+
 	public Tarefa(String nome) {
 		System.out.println("Criando a tarefa " + nome);
 		this.nome = nome;
-		
+
 	}
-	
 
 	public String getNome() {
 		return nome;
