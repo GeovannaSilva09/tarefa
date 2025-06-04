@@ -11,13 +11,24 @@ import br.dev.geovanna.tarefas.dao.FuncionarioDAO;
 import br.dev.geovanna.tarefas.model.Funcionario;
 import br.dev.geovanna.tarefas.model.Tarefa;
 import br.dev.geovanna.tarefas.ui.FuncionarioFrame;
+import br.dev.geovanna.tarefas.ui.FuncionariosListaFrame;
 
 public class Main {
 	static String caminho = "/Users/25132823/tarefasDS1TA/tarefas";
 
 	public static void main(String[] args) {
+		  
 		
-		new FuncionarioFrame();
+		//FuncionarioDAO dao = new FuncionarioDAO(null);
+		//dao.getFuncionarios();
+		
+//		String[][] frutas = new String[2][3];
+//		frutas[0][0] = "Banana";
+//		frutas[0][1] = 
+//		
+		
+		//new FuncionariosListaFrame();
+		//new FuncionarioFrame();
 
 //		UUID uuid = UUID.randomUUID();
 //		System.out.println(uuid);
