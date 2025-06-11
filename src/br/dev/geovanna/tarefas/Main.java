@@ -1,6 +1,6 @@
 package br.dev.geovanna.tarefas;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader;	
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -27,7 +27,7 @@ public class Main {
 //		frutas[0][1] = 
 //		
 		
-		//new FuncionariosListaFrame();
+		new FuncionariosListaFrame();
 		//new FuncionarioFrame();
 
 //		UUID uuid = UUID.randomUUID();
@@ -59,7 +59,7 @@ public class Main {
 		BufferedWriter bw = null;
 
 		try {
-			fw = new FileWriter(caminho, false);
+			fw = new FileWriter(caminho, true);
 			bw = new BufferedWriter(fw);
 
 			// Adicionando conteúdo ao arquivo
@@ -73,7 +73,7 @@ public class Main {
 			bw.flush();
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 
 	}
@@ -91,7 +91,7 @@ public class Main {
 
 			while (retorno != null) {
 				System.out.println(retorno);
-				retorno = br.readLine();
+				System.out.println(br.readLine());
 			}
 
 		} catch (FileNotFoundException erro) {
@@ -104,3 +104,8 @@ public class Main {
 	}
 
 }
+
+
+
+
+//control k para apagar arquivos no terminal ----> nano 

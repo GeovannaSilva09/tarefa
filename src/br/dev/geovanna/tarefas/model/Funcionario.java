@@ -1,6 +1,5 @@
 package br.dev.geovanna.tarefas.model;
 
-import java.util.UUID;
 
 import br.dev.geovanna.tarefas.utils.Utils;
 

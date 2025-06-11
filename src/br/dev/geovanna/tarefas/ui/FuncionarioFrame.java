@@ -1,6 +1,6 @@
 package br.dev.geovanna.tarefas.ui;
 
-import java.awt.Container;
+import java.awt.Container;	
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -91,6 +91,7 @@ public class FuncionarioFrame {
 			public void actionPerformed(ActionEvent e) {
 				int resposta = JOptionPane.showConfirmDialog(tela, "Sair do sistema?");
 				if(resposta == 0) {
+					
 					tela.dispose();
 
 				}
