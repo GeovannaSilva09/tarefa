@@ -6,12 +6,12 @@ public class Tarefa {
 
 	private String nome;
 	private String descricao;
-	private LocalDate dataInicio;
-	private int prazo;
-	private LocalDate dataPrevisaoDeEntrega;
-	private LocalDate dataEntrega;
-	private Status status;
-	private Funcionario responsavel;
+	private String dataInicio;
+	private String prazo;
+	private String dataPrevisaoDeEntrega;
+	private String dataEntrega;
+	private String status;
+	private String responsavel;
 
 	public Tarefa() {
 		System.out.println("Criando uma tarefa...");
@@ -40,52 +40,53 @@ public class Tarefa {
 		this.descricao = descricao;
 	}
 
-	public LocalDate getDataInicio() {
+	public String getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDate dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setDataInicio(String string) {
+		this.dataInicio = string;
 	}
 
-	public int getPrazo() {
+	public String getPrazo() {
 		return prazo;
 	}
 
-	public void setPrazo(int prazo) {
-		this.prazo = prazo;
+	public void setPrazo(String string) {
+		this.prazo = string;
 	}
 
-	public LocalDate getDataPrevisaoDeEntrega() {
+	public String getDataPrevisaoDeEntrega() {
 		return dataPrevisaoDeEntrega;
 	}
 
-	public void setDataPrevisaoDeEntrega(LocalDate dataPrevisaoDeEntrega) {
-		this.dataPrevisaoDeEntrega = dataPrevisaoDeEntrega;
+	public void setDataPrevisaoDeEntrega(String string) {
+		this.dataPrevisaoDeEntrega = string;
 	}
 
-	public LocalDate getDataEntrega() {
+	public String getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(LocalDate dataEntrega) {
-		this.dataEntrega = dataEntrega;
+	public void setDataEntrega(Object object) {
+		this.dataEntrega = (String) object;
 	}
 
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public Funcionario getResponsavel() {
+	public String getResponsavel() {
 		return responsavel;
 	}
 
-	public void setResponsavel(Funcionario responsavel) {
-		this.responsavel = responsavel;
+	public void setResponsavel(String string) {
+		this.responsavel = string;
 	}
 
+	
 }

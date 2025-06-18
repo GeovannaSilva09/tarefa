@@ -12,6 +12,9 @@ import br.dev.geovanna.tarefas.model.Funcionario;
 import br.dev.geovanna.tarefas.model.Tarefa;
 import br.dev.geovanna.tarefas.ui.FuncionarioFrame;
 import br.dev.geovanna.tarefas.ui.FuncionariosListaFrame;
+import br.dev.geovanna.tarefas.ui.GerenciadorFrame;
+import br.dev.geovanna.tarefas.ui.TarefasFrame;
+import br.dev.geovanna.tarefas.ui.TarefasListaFrame;
 
 public class Main {
 	static String caminho = "/Users/25132823/tarefasDS1TA/tarefas";
@@ -27,8 +30,8 @@ public class Main {
 //		frutas[0][1] = 
 //		
 		
-		new FuncionariosListaFrame();
-		//new FuncionarioFrame();
+		//new TarefasListaFrame(null);
+        new GerenciadorFrame();
 
 //		UUID uuid = UUID.randomUUID();
 //		System.out.println(uuid);

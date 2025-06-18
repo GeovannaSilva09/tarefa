@@ -37,8 +37,7 @@ public class FuncionariosListaFrame {
 	private void criarTela() {
 		JFrame tela = new JFrame("Lista de funcionários");
 		tela.setSize(600, 500);
-		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tela.setResizable(false);
+		tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 		tela.setLayout(null);
 		tela.setLocationRelativeTo(null);
 		
