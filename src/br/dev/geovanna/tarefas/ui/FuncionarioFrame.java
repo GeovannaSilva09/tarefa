@@ -18,12 +18,11 @@ public class FuncionarioFrame {
 
 	public FuncionarioFrame(JFrame tela) {
 		criarTela(tela);
-
 	}
 
 	private void criarTela(JFrame parent) {
 
-		JDialog tela = new JDialog(parent);
+		JDialog tela = new JDialog(parent, true);
 		tela.setSize(400, 400);
 		tela.setTitle("Cadastro de Funcionários");
 		tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,10 +53,8 @@ public class FuncionarioFrame {
 		Container painel = tela.getContentPane();
 		painel.add(labelNome);
 		painel.add(txtNome);
-
 		painel.add(labelCargo);
 		painel.add(txtCargo);
-
 		painel.add(labelSetor);
 		painel.add(txtSetor);
 		painel.add(btnSalvar);
@@ -67,10 +64,11 @@ public class FuncionarioFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				Funcionario f = new Funcionario();
 				f.setNome(txtNome.getText());
 				f.setCargo(txtCargo.getText());
-				f.setSetor(txtSetor.getText());
+				f.setCargo(txtSetor.getText());
 
 				FuncionarioDAO dao = new FuncionarioDAO(f);
 				dao.salvar();
@@ -84,28 +82,19 @@ public class FuncionarioFrame {
 			}
 		});
 		
-		
-		 btnSair.addActionListener(new ActionListener() {
+		btnSair.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int resposta = JOptionPane.showConfirmDialog(tela, "Sair do sistema?");
-				if(resposta == 0) {
-					
+				int resposta = JOptionPane.showConfirmDialog(tela, "Sair do Sistema?");
+				if (resposta == 0) {
 					tela.dispose();
-
 				}
 			}
 		});
-		 
-		 
-		 
-	
-		
-		  
 
 		tela.setVisible(true);
 
 	}
-
+	
 }

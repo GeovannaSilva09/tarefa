@@ -1,29 +1,37 @@
 package br.dev.geovanna.tarefas.model;
 
-import java.time.LocalDate;
+import br.dev.geovanna.tarefas.utils.Utils;
 
 public class Tarefa {
 
+	private String codigo;
 	private String nome;
 	private String descricao;
 	private String dataInicio;
-	private String prazo;
-	private String dataPrevisaoDeEntrega;
+	private String Prazo;
 	private String dataEntrega;
-	private String status;
-	private String responsavel;
+	private Status status;
+	private Funcionario responsavel;
 
-	public Tarefa() {
-		System.out.println("Criando uma tarefa...");
+	
+    public Tarefa() {
+        this.codigo = Utils.gerarUUID8();
+    }
 
-	}
+    public Tarefa(String nome) {
+        this.nome = nome;
+        this.codigo = Utils.gerarUUID8();
+    }
+	
+	
+    public String getCodigo() {
+        return codigo;
+    }
 
-	public Tarefa(String nome) {
-		System.out.println("Criando a tarefa " + nome);
-		this.nome = nome;
-
-	}
-
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+	
 	public String getNome() {
 		return nome;
 	}
@@ -44,49 +52,46 @@ public class Tarefa {
 		return dataInicio;
 	}
 
-	public void setDataInicio(String string) {
-		this.dataInicio = string;
+	public void setDataInicio(String dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
 	public String getPrazo() {
-		return prazo;
+		return Prazo;
 	}
 
-	public void setPrazo(String string) {
-		this.prazo = string;
-	}
-
-	public String getDataPrevisaoDeEntrega() {
-		return dataPrevisaoDeEntrega;
-	}
-
-	public void setDataPrevisaoDeEntrega(String string) {
-		this.dataPrevisaoDeEntrega = string;
+	public void setPrazo(String prazo) {
+		Prazo = prazo;
 	}
 
 	public String getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(Object object) {
-		this.dataEntrega = (String) object;
+	public void setDataEntrega(String dataEntrega) {
+		this.dataEntrega = dataEntrega;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public String getResponsavel() {
+	public Funcionario getResponsavel() {
 		return responsavel;
 	}
 
-	public void setResponsavel(String string) {
-		this.responsavel = string;
+	public void setResponsavel(Funcionario responsavel) {
+		this.responsavel = responsavel;
 	}
-
+	
+	@Override
+	public String toString() {
+		return nome + "," + descricao +  "," + dataInicio + "," + Prazo + "," + dataEntrega + responsavel + "\n";
+	}
+	
 	
 }

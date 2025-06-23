@@ -1,73 +1,75 @@
 package br.dev.geovanna.tarefas.dao;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.dev.geovanna.tarefas.model.Funcionario;
 import br.dev.geovanna.tarefas.model.Tarefa;
+
+
 
 public class TarefasDAO {
 
+    private static final String CAMINHO_ARQUIVO = 
+        "C:\\Users\\geovanna\\OneDrive\\Documentos\\tarefas-DS1T-A\\tarefas.csv.txt";
+
     private Tarefa tarefa;
 
-    private final String arquivo = "/Users/25132823/tarefasDS1TA/tarefas.csv";
+    public TarefasDAO() {
+    }
 
-    // Construtor recebe uma tarefa para salvar
     public TarefasDAO(Tarefa tarefa) {
         this.tarefa = tarefa;
     }
 
-    // Salva a tarefa no arquivo CSV
     public void salvar() {
-        try (FileWriter fw = new FileWriter(arquivo, true);
-             BufferedWriter bw = new BufferedWriter(fw)) {
-
-            bw.write(tarefa.toString());
-            bw.newLine(); // para garantir que cada tarefa fique em uma linha separada
-            bw.flush();
-
-            System.out.println(tarefa.getNome() + " gravado com sucesso!");
-
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO, true))) {
+            String matriculaResponsavel = (tarefa.getResponsavel() != null) 
+                ? tarefa.getResponsavel().getMatricula() 
+                : ""; // Caso não tenha responsável
+            bw.write(tarefa.getNome() + ","
+                   + tarefa.getDescricao() + ","
+                   + tarefa.getDataInicio() + ","
+                   + tarefa.getPrazo() + ","
+                   + tarefa.getDataEntrega() + ","
+                   + matriculaResponsavel);
+            bw.newLine();
         } catch (IOException e) {
-            System.err.println("Erro ao salvar a tarefa: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    // Lê todas as tarefas do arquivo CSV e retorna numa lista
+
     public List<Tarefa> getTarefas() {
         List<Tarefa> tarefas = new ArrayList<>();
 
-        try (FileReader fr = new FileReader(arquivo);
-             BufferedReader br = new BufferedReader(fr)) {
-
+        try (BufferedReader br = new BufferedReader(new FileReader(CAMINHO_ARQUIVO))) {
             String linha;
 
             while ((linha = br.readLine()) != null) {
-                // Supondo que o CSV esteja no formato: dataEntrega,dataInicio,status,nome,descricao,responsavel,...
                 String[] dados = linha.split(",");
 
-                if (dados.length >= 4) { // verifica se tem pelo menos os campos necessários
-                    Tarefa t = new Tarefa();
+                if (dados.length >= 5) {
+                    Tarefa tarefa = new Tarefa();
+                    tarefa.setNome(dados[0]);
+                    tarefa.setDescricao(dados[1]);
+                    tarefa.setDataInicio(dados[2]);
+                    tarefa.setPrazo(dados[3]);
+                    tarefa.setDataEntrega(dados[4]);
 
-                    t.setDataEntrega(dados[0]);
-                    t.setDataInicio(dados[1]);
-                    t.setStatus(dados[2]);
-                    t.setNome(dados[3]);
+                    // Se existir uma matrícula salva
+                    if (dados.length >= 6 && !dados[5].isEmpty()) {
+                        FuncionarioDAO daoFuncionario = new FuncionarioDAO(null);
+                        Funcionario responsavel = daoFuncionario.buscarPorMatricula(dados[5]);
+                        tarefa.setResponsavel(responsavel);
+                    }
 
-                    // Se você tiver mais campos (descrição, responsável, etc.), pode adicionar aqui, exemplo:
-                    // t.setDescricao(dados[4]);
-                    // t.setResponsavel(dados[5]);
-
-                    tarefas.add(t);
+                    tarefas.add(tarefa);
                 }
             }
-
         } catch (IOException e) {
-            System.err.println("Erro ao ler tarefas: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return tarefas;

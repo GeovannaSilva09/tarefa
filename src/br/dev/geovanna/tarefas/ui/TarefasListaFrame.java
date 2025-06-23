@@ -1,103 +1,106 @@
 package br.dev.geovanna.tarefas.ui;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import java.util.List;
+
+import br.dev.geovanna.tarefas.dao.TarefasDAO;
 import br.dev.geovanna.tarefas.model.Tarefa;
 
 public class TarefasListaFrame {
+
+	private JLabel labelTitulo;
 	
-	private JLabel titulo;
-    private JButton btnNovaTarefa;
-    private JButton btnFechar;
+	private JTable tabelaTarefas;
+	private DefaultTableModel modelTarefas;
+	private JScrollPane scrollTarefas;
+	private JButton btnNovaTarefa;
+	private JFrame tela;
+	
+	private String[] colunas = {"CÓDIGO", "NOME", "RESPONSÁVEL"};
 
-    private JTable tabela;
-    private DefaultTableModel modeloTabela;
-    private JScrollPane painelRolagem;
+	TarefasListaFrame() {
+		criarTela();
+	}
 
+	private void criarTela() {
 
-    private String[] colunasTabela = {"Código",  "Nome", "Responsável"};
-
-    
-    
-    
-    public TarefasListaFrame(JFrame parent) {
-        criarTela(parent);
-    }
-
-    private void criarTela(JFrame parent) {
-        JDialog tela = new JDialog(parent, true);
-        tela.setSize(600, 500);
-        tela.setTitle("Lista de Tarefas");
-        tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // DISPOSE_ON_CLOSE fecha apenas a janela selecionada
-        tela.setResizable(false);
-        tela.setLayout(null);
-        tela.setLocationRelativeTo(null);
-        
-        
-     
-        titulo = new JLabel("Tarefas");
-        titulo.setFont(new Font("Serif", Font.BOLD, 28));
-        titulo.setBounds(10, 10, 400, 40);
-
-      
-        modeloTabela = new DefaultTableModel(colunasTabela, 0);
-        tabela = new JTable(modeloTabela);
-        painelRolagem = new JScrollPane(tabela);
-        painelRolagem.setBounds(10, 60, 580, 340);
-
-    
-        btnNovaTarefa = new JButton("Nova tarefa");
-        btnNovaTarefa.setBounds(10, 410, 150, 40);
-
-        btnFechar = new JButton("Fechar");
-        btnFechar.setBounds(200, 410, 150, 40);
-        
-     
-        btnNovaTarefa.addActionListener(new ActionListener() {
+		JFrame tela = new JFrame("Lista de Tarefas");
+		tela.setSize(600,500);
+		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tela.setResizable(false);
+		tela.setLayout(null);
+		tela.setLocationRelativeTo(null);
+		
+		Container painel = tela.getContentPane();
+		
+		labelTitulo = new JLabel ("Cadastro de Tarefas");
+		labelTitulo.setFont(new Font ("arial", Font.BOLD, 28));
+		labelTitulo.setForeground(new Color(100, 0, 100));
+		labelTitulo.setBounds(10, 10, 400, 40);
+		
+		modelTarefas = new DefaultTableModel(colunas, 1);
+		tabelaTarefas = new JTable(modelTarefas);
+		
+		carregarDados();
+		scrollTarefas = new JScrollPane(tabelaTarefas);
+		scrollTarefas.setBounds(10, 60, 580, 340);
+		
+		btnNovaTarefa = new JButton("Nova Tarefa");
+		btnNovaTarefa.setBounds(10, 410, 150, 40);
+		
+		TarefasDAO dao = new TarefasDAO(null);
+		List<Tarefa> tarefa = dao.getTarefas();
+		
+		btnNovaTarefa.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new TarefasFrame(tela);
-			}
-		});		
-        
-        
-        
-        btnFechar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int resposta = JOptionPane.showConfirmDialog(tela, "Sair da lista de tarefas?");
-				if(resposta == JOptionPane.YES_OPTION) {
-					tela.dispose();
-				}
-						
+				
 				
 			}
 		});
-        
-        
-        Container painel = tela.getContentPane();
-        painel.add(titulo);
-        painel.add(painelRolagem);
-        painel.add(btnNovaTarefa);
-        painel.add(btnFechar);
-        
-        tela.setVisible(true);
-     
+		
+		
+		
+		
+		painel.add(labelTitulo);
+		painel.add(scrollTarefas);
+		painel.add(btnNovaTarefa);
+		
+		tela.setVisible(true);
+		
+	}
+	private Object[][] carregarDados(){
+	    TarefasDAO dao = new TarefasDAO();
+	    List<Tarefa> tarefas = dao.getTarefas();
 
-        
-    }
+	    Object[][] dados = new Object[tarefas.size()][3];
+	    int i = 0;
+
+	    for (Tarefa t : tarefas) {
+	        dados[i][0] = t.getCodigo();
+	        dados[i][1] = t.getNome();
+	        dados[i][2] = (t.getResponsavel() != null) ? t.getResponsavel().getNome() : "Sem responsável";
+	        i++;
+	    }
+
+	    modelTarefas.setDataVector(dados, colunas);
+	    return dados;
+	}
+
+	
+
 }
